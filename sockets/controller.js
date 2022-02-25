@@ -5,14 +5,14 @@ const socketController = (cliente) => {
 
     console.log('Jugador conectado', cliente.id);
     cliente.on('iniciarPartida', (data, callback) => {
-        client.join(data.sala);
+        cliente.join(data.sala);
 
-        jugadores.agregarJugador(client.id, data.nombre, data.sala);
+        jugadores.agregarJugador(cliente.id, data.nombre, data.sala);
+        console.log(jugadores.getJugadoresPorSala(data.sala));
+        cliente.broadcast.to(data.sala).emit('listaJugador', jugadores.getJugadoresPorSala(data.sala));
 
-        client.broadcast.to(data.sala).emit('listaJugador', usuarios.getJugadoresPorSala(data.sala));
 
-
-        callback(usuarios.getPersonasPorSala(data.sala));
+        callback(jugadores.getJugadoresPorSala(data.sala));
 
     })
     cliente.on('disconnect', () => {
