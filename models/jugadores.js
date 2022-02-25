@@ -44,5 +44,5 @@ class Jugadores {
 
 
 module.exports = {
-    Usuarios
+    Jugadores
 }
