@@ -4,7 +4,7 @@ class Jugadores {
         this.jugadores = [];
     }
 
-    agregarjugador(id, nombre, sala) {
+    agregarJugador(id, nombre, sala) {
 
         let jugador = { id, nombre, sala };
 
@@ -20,11 +20,11 @@ class Jugadores {
         return jugador;
     }
 
-    getjugadors() {
+    getjugadores() {
         return this.jugadores;
     }
 
-    getjugadorsPorSala(sala) {
+    getJugadoresPorSala(sala) {
         let jugadorsEnSala = this.jugadores.filter(jugador => jugador.sala === sala);
         return jugadorsEnSala;
     }
