@@ -19,7 +19,7 @@ const socketController = (cliente) => {
     cliente.on('jugada', (data, callback = Function) => {
         console.log(data);
         cliente.broadcast.to(data.sala).emit('jugada', data);
-        callback(data);
+        //callback(data);
     })
 
 
