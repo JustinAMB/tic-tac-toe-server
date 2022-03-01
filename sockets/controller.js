@@ -11,16 +11,19 @@ const socketController = (cliente) => {
         console.log(jugadores.getJugadoresPorSala(data.sala));
         cliente.broadcast.to(data.sala).emit('iniciarPartida', jugadores.getJugadoresPorSala(data.sala));
         callback(jugadores.getJugadoresPorSala(data.sala));
-
-    })
-    cliente.on('disconnect', () => {
-        console.log('Cliente desconectado', cliente.id);
     });
     cliente.on('jugada', (data, callback = Function) => {
         console.log(data);
         cliente.broadcast.to(data.sala).emit('jugada', data);
         //callback(data);
-    })
+    });
+    cliente.on('disconnect', () => {
+        console.log('Jugador desconectado', cliente.id);
+        let personaBorrada = jugadores.borrarJugador(cliente.id);
+        cliente.broadcast.to(personaBorrada.sala).emit('iniciarPartida', jugadores.getJugadoresPorSala(personaBorrada.sala));
+
+    });
+
 
 
 
