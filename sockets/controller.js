@@ -17,6 +17,11 @@ const socketController = (cliente) => {
         cliente.broadcast.to(data.sala).emit('jugada', data);
         //callback(data);
     });
+    cliente.on('ganador', (data, callback = Function) => {
+        console.log(data);
+        cliente.broadcast.to(data.sala).emit('ganador', data);
+        //callback(data);
+    });
     cliente.on('disconnect', () => {
         console.log('Jugador desconectado', cliente.id);
         let personaBorrada = jugadores.borrarJugador(cliente.id);
