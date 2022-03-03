@@ -29,10 +29,15 @@ const socketController = (cliente) => {
         //callback(data);
     });
     cliente.on('disconnect', () => {
-        console.log('Jugador desconectado', cliente.id);
-        let personaBorrada = jugadores.borrarJugador(cliente.id);
-        cliente.broadcast.to(personaBorrada.sala).emit('iniciarPartida', jugadores.getJugadoresPorSala(personaBorrada.sala));
+        try {
+            console.log('Jugador desconectado', cliente.id);
+            let personaBorrada = jugadores.borrarJugador(cliente.id);
+            cliente.broadcast.to(personaBorrada.sala).emit('iniciarPartida', jugadores.getJugadoresPorSala(personaBorrada.sala));
 
+        } catch (err) {
+
+
+        }
     });
 
 
