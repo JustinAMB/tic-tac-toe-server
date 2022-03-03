@@ -29,7 +29,7 @@ class Jugadores {
         return jugadorsEnSala;
     }
 
-    borrarjugador(id) {
+    borrarJugador(id) {
 
         let jugadorBorrada = this.getjugador(id);
 
