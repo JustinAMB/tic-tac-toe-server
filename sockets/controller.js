@@ -5,12 +5,18 @@ const socketController = (cliente) => {
 
     console.log('Jugador conectado', cliente.id);
     cliente.on('iniciarPartida', (data, callback = Function) => {
-        cliente.join(data.sala);
+        try {
+            cliente.join(data.sala);
 
-        jugadores.agregarJugador(cliente.id, data.nombre, data.sala, data.created);
-        console.log(jugadores.getJugadoresPorSala(data.sala));
-        cliente.broadcast.to(data.sala).emit('iniciarPartida', jugadores.getJugadoresPorSala(data.sala));
-        callback(jugadores.getJugadoresPorSala(data.sala));
+            jugadores.agregarJugador(cliente.id, data.nombre, data.sala, data.created);
+            console.log(jugadores.getJugadoresPorSala(data.sala));
+            cliente.broadcast.to(data.sala).emit('iniciarPartida', jugadores.getJugadoresPorSala(data.sala));
+            callback(jugadores.getJugadoresPorSala(data.sala));
+        } catch (err) {
+
+            callback();
+        }
+
     });
     cliente.on('jugada', (data, callback = Function) => {
         console.log(data);
