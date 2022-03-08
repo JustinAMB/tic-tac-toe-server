@@ -28,7 +28,7 @@
          cliente.broadcast.to(data.sala).emit('ganador', data);
          //callback(data);
      });
-     cliente.on('reniciar', (data, callback = Function) => {
+     cliente.on('reiniciar', (data, callback = Function) => {
          console.log(data);
          cliente.broadcast.to(data.sala).emit('reiniciar', data);
          //callback(data);
